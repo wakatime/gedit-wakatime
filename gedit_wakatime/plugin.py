@@ -9,7 +9,10 @@ _documents = []
 
 logger = logging.getLogger('gedit-wakatime-plugin')
 logger.addHandler(logging.StreamHandler())
-logger.setLevel(os.environ.get('GEDIT_WAKATIME_PLUGIN_VERBOSITY', logging.WARN))
+if os.environ.get('GEDIT_WAKATIME_PLUGIN_DEBUG'):
+    logger.setLevel(logging.DEBUG)
+else:
+    logger.setLevel(logging.WARN)
 
 class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
     __gtype_name__ = "WakatimePlugin"
