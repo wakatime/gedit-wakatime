@@ -16,18 +16,26 @@ plugin_module_dst_dir = path.join(gedit_plugins_dir, plugin_module_name)
 plugin_descriptor_fname = 'wakatime.plugin'
 plugin_descriptor_file = path.join(base_path, plugin_descriptor_fname)
 
-def install():
+def check_wakatime():
     try:
-        if path.exists(plugin_module_dst_dir):
-            shutil.rmtree(plugin_module_dst_dir)
-        shutil.copytree(plugin_module_src_dir, plugin_module_dst_dir)
-        shutil.copy(plugin_descriptor_file, gedit_plugins_dir)
-        print('Wakatime plugin installation successful.')
-        print('Now activate it in gedit Edit > Preferences > Plugins.')
+        import wakatime
+    except:
+        import pip
+        pip.main(['install', 'wakatime'])
+
+def install():
+    check_wakatime()
+    if path.exists(plugin_module_dst_dir):
+        shutil.rmtree(plugin_module_dst_dir)
+    shutil.copytree(plugin_module_src_dir, plugin_module_dst_dir)
+    shutil.copy(plugin_descriptor_file, gedit_plugins_dir)
+    print('Wakatime plugin installation successful.')
+    print('Now activate it in gedit Edit > Preferences > Plugins.')
+
+if __name__ == '__main__':
+    try:
+        install()
     except PermissionError:
         print('ERROR: You must be root.')
         print('Try: sudo {}'.format(' '.join(sys.argv)))
-
-if __name__ == '__main__':
-    install()
 
