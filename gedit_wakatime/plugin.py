@@ -1,8 +1,15 @@
+import os
+import logging
+
 from gi.repository import GObject, Gedit
 
 from .wakatime import send_heartbeat
 
 _documents = []
+
+logger = logging.getLogger('gedit-wakatime-plugin')
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(os.environ.get('GEDIT_WAKATIME_PLUGIN_VERBOSITY', logging.WARN))
 
 class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
     __gtype_name__ = "WakatimePlugin"
@@ -37,11 +44,11 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
 
     def on_document_saved(self, document, data=None):
         file_uri = document.get_uri_for_display()
-        print('Document saved: {}'.format(file_uri))
+        logger.debug('Document saved: {}'.format(file_uri))
         send_heartbeat(file_uri, write=True)
 
     def on_document_changed(self, document, data=None):
         file_uri = document.get_uri_for_display()
-        print('Document changed: {}'.format(file_uri))
+        logger.debug('Document changed: {}'.format(file_uri))
         send_heartbeat(file_uri)
 
