@@ -1,0 +1,11 @@
+[Plugin]
+Loader=python3
+Module=gedit_wakatime
+IAge=3
+Name=Wakatime
+Description=Gedit plugin to quantify your coding at https://wakatime.com
+Authors=Ricardo Gemignani <ricardo.gemignani@gmail.com>
+Copyright=Copyright (c) 2015, Ricardo Gemignani
+Website=https://github.com/rsgemignani/gedit-wakatime
+Version=0.1
+
