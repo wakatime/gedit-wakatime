@@ -7,5 +7,5 @@ Description=Gedit plugin to quantify your coding at https://wakatime.com
 Authors=Ricardo Gemignani <ricardo.gemignani@gmail.com>
 Copyright=Copyright (c) 2015, Ricardo Gemignani
 Website=https://github.com/rsgemignani/gedit-wakatime
-Version=0.1
+Version=1.0.0
 
