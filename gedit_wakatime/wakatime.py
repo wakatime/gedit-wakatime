@@ -9,11 +9,9 @@ logger = logging.getLogger('gedit-wakatime-plugin')
 ACTION_FREQUENCY = 2
 PLUGIN_USER_AGENT = 'gedit/3 gedit-wakatime/{}'.format(__version__)
 
-_last_heartbeat = 0
+_last_heartbeat = {}
 
-def enough_time_passed(now, last_time=None):
-    if not last_time:
-        last_time = _last_heartbeat
+def enough_time_passed(now, last_time):
     if now - last_time > ACTION_FREQUENCY * 60:
         return True
     return False
@@ -25,7 +23,7 @@ def flatten_args(args_dict):
 def send_heartbeat(file_uri, write=False):
     logger.debug('Sending heartbeat')
     now = time.time()
-    if enough_time_passed(now):
+    if enough_time_passed(now, _last_heartbeat.get(file_uri, 0)) or write:
         waka_args = {
             '--file': file_uri,
             '--time': now,
@@ -34,7 +32,7 @@ def send_heartbeat(file_uri, write=False):
         }
         waka_args = ['wakatime'] + flatten_args(waka_args)
         logger.debug('Calling wakatime with: {}'.format(waka_args))
-        subprocess.call(waka_args)
+        subprocess.Popen(waka_args)
         global _last_heartbeat
-        _last_heartbeat = now
+        _last_heartbeat[file_uri] = now
 
