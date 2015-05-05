@@ -3,6 +3,8 @@ gedit-wakatime
 
 Gedit 3.8 plugin to quantify your coding at https://wakatime.com
 
+This plugin was contributed by WakaTime community member [Ricardo Gemignani](https://github.com/rsgemignani).
+
 
 Download
 --------
@@ -27,9 +29,3 @@ Screen Shots
 ------------
 
 ![Project Overview](https://wakatime.com/static/img/ScreenShots/ScreenShot-2014-10-29.png)
-
-
-Author
-------
-
-[Ricardo Gemignani](https://github.com/rsgemignani)
