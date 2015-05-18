@@ -2,7 +2,6 @@
 
 import sys
 import shutil
-import subprocess
 from os import path
 
 base_path = path.dirname(path.abspath(__file__))
@@ -16,12 +15,22 @@ plugin_module_dst_dir = path.join(gedit_plugins_dir, plugin_module_name)
 plugin_descriptor_fname = 'wakatime.plugin'
 plugin_descriptor_file = path.join(base_path, plugin_descriptor_fname)
 
+
+try:
+    assert PermissionError
+except:
+    class PermissionError(Exception):
+        pass
+
+
 def check_wakatime():
     try:
         import wakatime
+        assert wakatime
     except:
         import pip
         pip.main(['install', 'wakatime'])
+
 
 def install():
     check_wakatime()
@@ -32,10 +41,10 @@ def install():
     print('Wakatime plugin installation successful.')
     print('Now activate it in gedit Edit > Preferences > Plugins.')
 
+
 if __name__ == '__main__':
     try:
         install()
-    except PermissionError:
+    except (PermissionError, IOError, OSError):
         print('ERROR: You must be root.')
         print('Try: sudo {}'.format(' '.join(sys.argv)))
-
