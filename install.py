@@ -5,8 +5,8 @@ import shutil
 from os import path
 
 base_path = path.dirname(path.abspath(__file__))
-
-gedit_plugins_dir = '/usr/lib/gedit/plugins'
+home_dir = path.expanduser('~')
+gedit_plugins_dir = home_dir + '/.local/share/gedit/plugins'
 
 plugin_module_name = 'gedit_wakatime'
 plugin_module_src_dir = path.join(base_path, plugin_module_name)
