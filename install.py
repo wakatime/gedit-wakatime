@@ -28,8 +28,13 @@ def check_wakatime():
         import wakatime
         assert wakatime
     except:
-        import pip
-        pip.main(['install', 'wakatime'])
+        try:
+            import pip
+            pip.main(['install', 'wakatime'])
+        except ImportError:
+            print('Error: Please install pip with this command:')
+            print('sudo easy_install pip')
+            print('Then re-run this script.')
 
 
 def install():
