@@ -6,7 +6,11 @@ from os import path
 
 base_path = path.dirname(path.abspath(__file__))
 home_dir = path.expanduser('~')
-gedit_plugins_dir = home_dir + '/.local/share/gedit/plugins'
+
+if sys.argv[1:]:
+    gedit_plugins_dir = path.expanduser(sys.argv[1])
+else:
+    gedit_plugins_dir = path.join(home_dir, '.local', 'share', 'gedit', 'plugins')
 
 plugin_module_name = 'gedit_wakatime'
 plugin_module_src_dir = path.join(base_path, plugin_module_name)

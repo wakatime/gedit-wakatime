@@ -16,13 +16,18 @@ Installation
 ------------
 
 1. Run the `install.py` script as root
-1. Edit `~/.wakatime.cfg` and add your apikey as follows:
+2. Edit `~/.wakatime.cfg` and add your apikey as follows:
 
     ```
     [settings]
     api_key = <your-api-key>
     ```
-1. Activate the plugin in Gedit Edit > Preferences > Plugins
+3. Activate the plugin in Gedit Edit > Preferences > Plugins
+
+
+Note: If your Gedit plugins directory is non-standard pass it to `install.py` like:
+
+    ./install.py ~/.gnome2/gedit/plugins/
 
 
 Screen Shots
