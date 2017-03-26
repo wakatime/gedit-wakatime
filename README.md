@@ -1,7 +1,7 @@
 gedit-wakatime
 ============
 
-Gedit 3.8 plugin to quantify your coding at https://wakatime.com
+Gedit 3.8+ plugin to quantify your coding at https://wakatime.com
 
 This plugin was contributed by WakaTime community member [Ricardo Gemignani](https://github.com/rsgemignani).
 
