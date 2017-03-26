@@ -27,7 +27,7 @@ Installation
 
 Note: If your Gedit plugins directory is non-standard pass it to `install.py` like:
 
-    ./install.py ~/.gnome2/gedit/plugins/
+    sudo ./install.py ~/.gnome2/gedit/plugins/
 
 
 Screen Shots
