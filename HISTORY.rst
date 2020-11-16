@@ -2,6 +2,10 @@
 History
 -------
 
+1.1.0 (Unreleased)
+++++++++++++++++++
+
+- Actually send heartbeats in correct situations (as per `Plugin creation tutorial <https://wakatime.com/help/creating-plugin#plugin-overview>`_)
 
 1.0.1 (2017-03-26)
 ++++++++++++++++++
