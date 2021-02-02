@@ -13,6 +13,14 @@ _last_heartbeat_time = 0
 _last_heartbeat_file = None
 
 
+def should_log(file_uri, now, write):
+    return (
+        write
+        or file_uri != _last_heartbeat_file
+        or now - _last_heartbeat_time > ACTION_FREQUENCY
+    )
+
+
 def flatten_args(args_dict):
     return [str(arg) for key, value in args_dict.items() if value
                 for arg in [key, value] if not isinstance(arg, bool)]
@@ -21,11 +29,7 @@ def send_heartbeat(file_uri, write=False):
     global _last_heartbeat_time, _last_heartbeat_file
     logger.debug("Heartbeat triggered")
     now = time.time()
-    if (
-        not write
-        and file_uri == _last_heartbeat_file
-        and now - _last_heartbeat_time < ACTION_FREQUENCY
-    ):
+    if not should_log(file_uri, now, write):
         logger.debug("Not necessary to send heartbeat")
         return
 
