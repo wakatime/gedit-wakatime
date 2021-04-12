@@ -1,19 +1,14 @@
-gedit-wakatime
-============
+# gedit-wakatime
 
 Gedit 3.8+ plugin to quantify your coding at https://wakatime.com
 
-This plugin was contributed by WakaTime community member [Ricardo Gemignani](https://github.com/rsgemignani).
 
-
-Download
---------
+## Download
 
 See [GitHub releases](https://github.com/wakatime/gedit-wakatime/releases)
 
 
-Installation
-------------
+## Installation
 
 1. Run the `install.py` script as root
 2. Edit `~/.wakatime.cfg` and add your apikey as follows:
@@ -30,7 +25,11 @@ Note: If your Gedit plugins directory is non-standard pass it to `install.py` li
     sudo ./install.py ~/.gnome2/gedit/plugins/
 
 
-Screen Shots
-------------
+## Screen Shots
 
 ![Project Overview](https://wakatime.com/static/img/ScreenShots/ScreenShot-2014-10-29.png)
+
+
+## Special Thanks
+
+This plugin was contributed by WakaTime community member [Ricardo Gemignani](https://github.com/rickgemignani).
