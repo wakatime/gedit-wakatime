@@ -46,12 +46,18 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
             doc.connect('saved', self.on_document_saved)
             doc.connect('tepl-cursor-moved', self.on_document_changed)
 
+    def _get_file_uri(self, document):
+        location = document.get_file().get_location()
+        if not location:
+            return None
+        return location.get_path()
+
     def on_document_saved(self, document, data=None):
-        file_uri = document.get_file().get_location().get_path()
+        file_uri = self._get_file_uri(document)
         logger.debug('Document saved: {}'.format(file_uri))
         send_heartbeat(file_uri, write=True)
 
     def on_document_changed(self, document, data=None):
-        file_uri = document.get_file().get_location().get_path()
+        file_uri = self._get_file_uri(document)
         logger.debug('Document changed: {}'.format(file_uri))
         send_heartbeat(file_uri)
