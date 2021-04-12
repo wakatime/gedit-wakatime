@@ -50,7 +50,7 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         document = tab.get_document()
         self._bind_document(document)
 
-        file_uri = document.get_uri_for_display()
+        file_uri = self._get_file_uri(document)
         logger.debug("Tab changed: {}".format(file_uri))
         send_heartbeat(file_uri)
 
