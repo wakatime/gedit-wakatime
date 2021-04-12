@@ -22,11 +22,13 @@ def should_log(file_uri, now, write):
 
 
 def flatten_args(args_dict):
-    return [str(arg) for key, value in args_dict.items() if value
-                for arg in [key, value] if not isinstance(arg, bool)]
+    return [str(arg) for key, value in args_dict.items() if value for arg in [key, value] if not isinstance(arg, bool)]
+
 
 def send_heartbeat(file_uri, write=False):
     global _last_heartbeat_time, _last_heartbeat_file
+    if file_uri is None:
+        return
     logger.debug("Heartbeat triggered")
     now = time.time()
     if not should_log(file_uri, now, write):
