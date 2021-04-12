@@ -14,6 +14,7 @@ if os.environ.get('GEDIT_WAKATIME_PLUGIN_DEBUG'):
 else:
     logger.setLevel(logging.WARN)
 
+
 class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
     __gtype_name__ = "WakatimePlugin"
 
@@ -43,15 +44,14 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         if doc not in _documents:
             _documents.append(doc)
             doc.connect('saved', self.on_document_saved)
-            doc.connect('cursor-moved', self.on_document_changed)
+            doc.connect('tepl-cursor-moved', self.on_document_changed)
 
     def on_document_saved(self, document, data=None):
-        file_uri = document.get_uri_for_display()
+        file_uri = document.get_file().get_location().get_path()
         logger.debug('Document saved: {}'.format(file_uri))
         send_heartbeat(file_uri, write=True)
 
     def on_document_changed(self, document, data=None):
-        file_uri = document.get_uri_for_display()
+        file_uri = document.get_file().get_location().get_path()
         logger.debug('Document changed: {}'.format(file_uri))
         send_heartbeat(file_uri)
-
