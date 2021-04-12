@@ -5,8 +5,6 @@ from gi.repository import GObject, Gedit
 
 from .wakatime import send_heartbeat
 
-_documents = []
-
 logger = logging.getLogger('gedit-wakatime-plugin')
 logger.addHandler(logging.StreamHandler())
 if os.environ.get('GEDIT_WAKATIME_PLUGIN_DEBUG'):
@@ -22,6 +20,7 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
 
     def __init__(self):
         GObject.Object.__init__(self)
+        self._documents = []
 
     def do_activate(self):
         self._bind_window()
@@ -33,16 +32,11 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         pass
 
     def _bind_window(self):
-        self.window.connect('active-tab-changed', self._on_active_tab_changed)
+        self.window.connect('active-tab-changed', self.on_active_tab_changed)
 
-    def _on_active_tab_changed(self, window, tab):
-        self._bind_tab(tab)
-
-    def _bind_tab(self, tab):
-        global _documents
-        doc = tab.get_document()
-        if doc not in _documents:
-            _documents.append(doc)
+    def _bind_document(self, doc):
+        if doc not in self._documents:
+            self._documents.append(doc)
             doc.connect('saved', self.on_document_saved)
             doc.connect('tepl-cursor-moved', self.on_document_changed)
 
@@ -51,6 +45,14 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         if not location:
             return None
         return location.get_path()
+
+    def on_active_tab_changed(self, window, tab):
+        document = tab.get_document()
+        self._bind_document(document)
+
+        file_uri = self._get_file_uri(document)
+        logger.debug("Tab changed: {}".format(file_uri))
+        send_heartbeat(file_uri)
 
     def on_document_saved(self, document, data=None):
         file_uri = self._get_file_uri(document)
