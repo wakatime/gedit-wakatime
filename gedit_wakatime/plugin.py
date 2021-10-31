@@ -38,7 +38,10 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         if doc not in self._documents:
             self._documents.append(doc)
             doc.connect('saved', self.on_document_saved)
-            doc.connect('tepl-cursor-moved', self.on_document_changed)
+            try:
+                doc.connect('tepl-cursor-moved', self.on_document_changed)
+            except TypeError:
+                doc.connect('cursor-moved', self.on_document_changed)
 
     def _get_file_uri(self, document):
         location = document.get_file().get_location()
