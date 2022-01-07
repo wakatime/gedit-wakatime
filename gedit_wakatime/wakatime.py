@@ -1,3 +1,4 @@
+import os
 import time
 import logging
 import subprocess
@@ -8,6 +9,7 @@ logger = logging.getLogger('gedit-wakatime-plugin')
 
 ACTION_FREQUENCY = 2 * 60
 PLUGIN_USER_AGENT = 'gedit/3 gedit-wakatime/{}'.format(__version__)
+WAKATIME_CLI = os.path.join(os.path.realpath(os.environ.get('WAKATIME_HOME') or os.path.expanduser('~')), '.wakatime', 'wakatime-cli')
 
 _last_heartbeat_time = 0
 _last_heartbeat_file = None
@@ -15,9 +17,9 @@ _last_heartbeat_file = None
 
 def should_log(file_uri, now, write):
     return (
-        write
-        or file_uri != _last_heartbeat_file
-        or now - _last_heartbeat_time > ACTION_FREQUENCY
+        write or
+        file_uri != _last_heartbeat_file or
+        now - _last_heartbeat_time > ACTION_FREQUENCY
     )
 
 
@@ -35,14 +37,13 @@ def send_heartbeat(file_uri, write=False):
         logger.debug("Not necessary to send heartbeat")
         return
 
-    waka_args = {
-        '--file': file_uri,
+    args = [WAKATIME_CLI] + flatten_args({
+        '--entity': file_uri,
         '--time': now,
         '--write': write,
         '--plugin': PLUGIN_USER_AGENT,
-    }
-    waka_args = ['wakatime'] + flatten_args(waka_args)
-    logger.debug('Calling wakatime with: {}'.format(waka_args))
-    subprocess.Popen(waka_args)
+    })
+    logger.debug('Calling wakatime with: {}'.format(args))
+    subprocess.Popen(args)
     _last_heartbeat_time = now
     _last_heartbeat_file = file_uri
