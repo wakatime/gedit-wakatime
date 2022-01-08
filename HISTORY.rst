@@ -2,6 +2,15 @@ History
 -------
 
 
+2.0.1 (2022-01-07)
+++++++++++++++++++
+
+- Detect Gedit version.
+  `#8 <https://github.com/wakatime/gedit-wakatime/issues/8>`_
+- Remove instructions to use sudo when installing.
+  `#8 <https://github.com/wakatime/gedit-wakatime/issues/8>`_
+
+
 2.0.0 (2022-01-07)
 ++++++++++++++++++
 
