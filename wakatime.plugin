@@ -7,5 +7,5 @@ Description=Gedit plugin to quantify your coding at https://wakatime.com and aut
 Authors=WakaTime <support@wakatime.com>
 Copyright=Copyright (c) 2021, WakaTime
 Website=https://github.com/wakatime/gedit-wakatime
-Version=1.1.0
+Version=2.0.0
 
