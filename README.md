@@ -10,7 +10,7 @@ See [GitHub releases](https://github.com/wakatime/gedit-wakatime/releases)
 
 ## Installation
 
-1. Run the `install.py` script as root
+1. Run the `install.py` script.
 2. Edit `~/.wakatime.cfg` and add your apikey as follows:
 
     ```
@@ -22,7 +22,7 @@ See [GitHub releases](https://github.com/wakatime/gedit-wakatime/releases)
 
 Note: If your Gedit plugins directory is non-standard pass it to `install.py` like:
 
-    sudo ./install.py ~/.gnome2/gedit/plugins/
+    ./install.py ~/.gnome2/gedit/plugins/
 
 
 ## Screen Shots
