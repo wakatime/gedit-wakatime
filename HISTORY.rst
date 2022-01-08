@@ -2,6 +2,14 @@ History
 -------
 
 
+2.0.0 (2022-01-07)
+++++++++++++++++++
+
+- Use new Go wakatime-cli installed at ~/.wakatime/wakatime-cli.
+- Support new cursor-moved event.
+  `#12 <https://github.com/wakatime/gedit-wakatime/pull/12>`_
+
+
 1.1.0 (2021-04-11)
 ++++++++++++++++++
 
