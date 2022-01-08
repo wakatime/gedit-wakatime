@@ -2,13 +2,14 @@ import os
 import time
 import logging
 import subprocess
+from gi import __version__ as gedit_version
 
-from ._version import __version__
+from ._version import __version__ as plugin_version
 
 logger = logging.getLogger('gedit-wakatime-plugin')
 
 ACTION_FREQUENCY = 2 * 60
-PLUGIN_USER_AGENT = 'gedit/3 gedit-wakatime/{}'.format(__version__)
+PLUGIN_USER_AGENT = 'gedit/{0} gedit-wakatime/{1}'.format(gedit_version, plugin_version)
 WAKATIME_CLI = os.path.join(os.path.realpath(os.environ.get('WAKATIME_HOME') or os.path.expanduser('~')), '.wakatime', 'wakatime-cli')
 
 _last_heartbeat_time = 0
