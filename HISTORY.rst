@@ -2,6 +2,13 @@ History
 -------
 
 
+2.0.2 (2024-06-13)
+++++++++++++++++++
+
+- Fix for Gedit v44+.
+  `#16 <https://github.com/wakatime/gedit-wakatime/pull/16>`_
+
+
 2.0.1 (2022-01-07)
 ++++++++++++++++++
 
