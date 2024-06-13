@@ -50,7 +50,7 @@ class WakatimePlugin(GObject.Object, Gedit.WindowActivatable):
         return location.get_path()
 
     def on_active_tab_changed(self, window, tab=None):
-        tab = tab if tab else self.window.get_active_tab()
+        tab = tab or self.window.get_active_tab()
         if not tab:
             return
 
